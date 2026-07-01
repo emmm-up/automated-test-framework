@@ -5,11 +5,9 @@
 提供常用的辅助函数
 """
 
-from datetime import datetime, timedelta
 import json
-import random
-import string
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, List, Optional
+from datetime import datetime, timedelta
 
 
 class Helper:
@@ -190,59 +188,3 @@ class Helper:
                 differences["removed"][key] = dict1[key]
 
         return differences
-
-    @staticmethod
-    def random_string(length: int = 8, alphabet: str = string.ascii_lowercase) -> str:
-        """Generate a random string for test data."""
-        if length < 0:
-            raise ValueError("length must be greater than or equal to 0")
-        return "".join(random.choice(alphabet) for _ in range(length))
-
-    @staticmethod
-    def merge_headers(*headers: Optional[Dict[str, str]]) -> Dict[str, str]:
-        """Merge optional HTTP header dictionaries from left to right."""
-        merged: Dict[str, str] = {}
-        for header_set in headers:
-            if header_set:
-                merged.update(header_set)
-        return merged
-
-    @staticmethod
-    def chunk_list(items: Iterable[Any], size: int) -> List[List[Any]]:
-        """Split an iterable into fixed-size chunks."""
-        if size <= 0:
-            raise ValueError("size must be greater than 0")
-
-        chunks: List[List[Any]] = []
-        current: List[Any] = []
-        for item in items:
-            current.append(item)
-            if len(current) == size:
-                chunks.append(current)
-                current = []
-        if current:
-            chunks.append(current)
-        return chunks
-
-    @staticmethod
-    def redact_sensitive(
-        data: Dict[str, Any],
-        sensitive_keys: Optional[List[str]] = None,
-        replacement: str = "***",
-    ) -> Dict[str, Any]:
-        """Mask sensitive values in nested dictionaries before logging."""
-        keys = {key.lower() for key in (sensitive_keys or ["authorization", "password", "secret", "token"])}
-        redacted: Dict[str, Any] = {}
-        for key, value in data.items():
-            if key.lower() in keys:
-                redacted[key] = replacement
-            elif isinstance(value, dict):
-                redacted[key] = Helper.redact_sensitive(value, list(keys), replacement)
-            else:
-                redacted[key] = value
-        return redacted
-
-    @staticmethod
-    def validate_required_fields(data: Dict[str, Any], fields: List[str]) -> List[str]:
-        """Return required fields that are missing or empty."""
-        return [field for field in fields if field not in data or data[field] in (None, "")]
