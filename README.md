@@ -1,4 +1,4 @@
-# 自动化测试框架 (Automated Test Framework)
+# 自动化测试 (Automated Test Framework)
 
 完整的Python自动化测试框架搭建示例，涵盖 **技术选型、环境部署、CI/CD集成** 三个核心阶段。
 
