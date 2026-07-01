@@ -1,0 +1,25 @@
+# 核心测试框架
+pytest==7.4.3
+pytest-allure==0.0.0
+pytest-xdist==3.5.0
+pytest-cov==4.1.0
+pytest-timeout==2.2.0
+
+# HTTP和API测试
+requests==2.31.0
+
+# 环境变量管理
+python-dotenv==1.0.0
+
+# 测试数据生成
+faker==20.0.0
+
+# 日志
+loguru==0.7.2
+
+# 工具库
+pyyaml==6.0.1
+colorama==0.4.6
+
+# Allure报告
+allure-pytest==2.13.2
