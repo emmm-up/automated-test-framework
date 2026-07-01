@@ -11,7 +11,7 @@ API客户端基类
 """
 
 import json
-from typing import Dict, Any
+from typing import Optional, Dict, Any, Union, List
 from urllib.parse import urljoin
 
 import requests
