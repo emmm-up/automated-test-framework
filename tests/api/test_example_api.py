@@ -44,7 +44,7 @@ class TestExampleAPI:
 
         # 断言：数据不为空
         assert len(data) > 0, "Expected non-empty list"
-        logger.info(f"\u2705 数据不为空")
+        logger.info("\u2705 数据不为空")
 
         # 断言：每个项目都有字段
         first_item = data[0]
@@ -72,7 +72,7 @@ class TestExampleAPI:
         # 断言：响应是对象
         data = response.json()
         assert isinstance(data, dict)
-        logger.info(f"\u2705 响应是对象")
+        logger.info("\u2705 响应是对象")
 
         # 断言：文章ID正确
         assert data["id"] == post_id
@@ -106,7 +106,7 @@ class TestExampleAPI:
         data = response.json()
         for key in ["title", "body", "userId"]:
             assert key in data, f"Missing field: {key}"
-        logger.info(f"\u2705 响应包含所有需要的字段")
+        logger.info("\u2705 响应包含所有需要的字段")
 
     @pytest.mark.regression
     def test_get_post_not_found(self, api_client):
